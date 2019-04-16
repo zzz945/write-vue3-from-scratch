@@ -1,84 +1,45 @@
-# Goal
+## Vue源码为什么难读
 
-Write a simplest vue from scratch using latest techniques without so much backward compatible noise. You'll have a clean understanding of vue after following my process.
+1. Vue源码中80%是非核心功能。而我们读源码的目的，只想了解全貌及部分核心功能，比如数据代理、双向绑定、vnode渲染、component渲染等。
 
-## TDD Environment Setup
+2. Vue源码中包含大量向后兼容代码。而我们读源码的目的，只想了解思路而非细节。举个最简单的例子，用浏览器原生的proxy实现数据代理和双向绑定，就比Vue2中defineProperty的hack做法要简洁很多。
 
-1. create repository
+## 目标
 
-```sh
-$ mkdir create-vue3-from-scratch
-$ cd create-vue3-from-scratch
-$ git init
-```
+《write-vue3-from-scratch》系列文章，将按Vue3.0公开的思路，不care浏览器兼容性，用最新的技术，写一个最简化的Vue。跟随我的步骤，你将会对Vue有个清晰的理解。
 
-2. add .gitngnore
+## 方法：测试驱动开发
 
-> https://github.com/zzz945/write-vue3-from-scratch/commit/152224ee3fb730dad13b0cdfde37a7eee01abd7c#diff-a084b794bc0759e7a6b77810e01874f2
+### Why
 
-3. init package.json
+1. 控制质量，便于回归测试，提高开发效率
+2. test case即文档
 
-```sh
-$ npm init
-```
+### How
 
-4. install babel-loader
+对于每个feature，我们首先做几个准入case，再写代码实现出来。
 
-> https://github.com/babel/babel-loader#install
+### 步骤
 
-```sh
-$ npm install -D babel-loader @babel/core @babel/preset-env webpack
-```
+1. [TDD Environment Setup](https://github.com/zzz945/write-vue3-from-scratch/blob/master/01.TDD%20Environment%20Setup.md)
 
-6. install karma
+2. Data proxy (TODO)
 
-> https://karma-runner.github.io/3.0/intro/installation.html
+3. Dependence collection and notification (TODO)
 
-```sh
-# Install Karma:
-$ npm install karma --save-dev
+4. Raw vnode render (TODO)
 
-# Install plugins that your project needs:
-$ npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
+5. Component vnode render (TODO)
 
-$ npm install -g karma-cli
-```
- 
-7. install and config karma-webpack for test scriptssupport es6
+6. Handle dom event (TODO)
 
-> https://github.com/webpack-contrib/karma-webpack
-> https://github.com/zzz945/write-vue3-from-scratch/commit/9bf43f9b3ddc8f15a6b1d0e3ab77b725b339cb70#diff-a2a3b7b0c9c3b4b93b4aebf4e3ec3cfb
+7. Computed (TODO)
 
-```sh
-$ npm i -D karma-webpack
-```
+8. Watch (TODO)
 
-8.  Test Es6 in test case
+9. Component event and action (TODO)
 
-> https://github.com/zzz945/write-vue3-from-scratch/commit/9bf43f9b3ddc8f15a6b1d0e3ab77b725b339cb70#diff-4cec89e9e60decc25f7c64c8c8568760
+10. Watcher scheduler (TODO)
 
-```sh
-$ karma start
-```
+11. Patch (TODO)
 
-## Implement Vue3
-
-1. Data proxy (TODO)
-
-2. Dependence collection and notification (TODO)
-
-3. Raw vnode render (TODO)
-
-4. Component vnode render (TODO)
-
-5. Handle dom event (TODO)
-
-6. Computed (TODO)
-
-7. Watch (TODO)
-
-8. Component event and action (TODO)
-
-9. Watcher scheduler (TODO)
-
-10. Patch (TODO)
