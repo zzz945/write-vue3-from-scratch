@@ -27,7 +27,7 @@
 
 3. [实现$watch](https://github.com/zzz945/write-vue3-from-scratch/commit/e69f5e870014be7417d08fd0368d8aa6b9cba10e)
 
-4. Raw vnode render (TODO)
+4. [html原生元素渲染](https://github.com/zzz945/write-vue3-from-scratch/commit/89df7464fec10653b2e12e4cb42756d71312a5dd)
 
 5. Component vnode render (TODO)
 
