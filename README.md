@@ -21,11 +21,11 @@
 
 ### 步骤
 
-1. [TDD Environment Setup](https://github.com/zzz945/write-vue3-from-scratch/blob/master/01.TDD%20Environment%20Setup.md)
+1. [TDD环境搭建](https://github.com/zzz945/write-vue3-from-scratch/blob/master/01.TDD%20Environment%20Setup.md)
 
-2. Data proxy (TODO)
+2. [Data代理](https://github.com/zzz945/write-vue3-from-scratch/commit/3d4b919252a98a9f6898329016a17aa1d6d2da70)
 
-3. Dependence collection and notification (TODO)
+3. [实现$watch](https://github.com/zzz945/write-vue3-from-scratch/commit/e69f5e870014be7417d08fd0368d8aa6b9cba10e)
 
 4. Raw vnode render (TODO)
 
