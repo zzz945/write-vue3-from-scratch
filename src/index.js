@@ -37,6 +37,12 @@ class Vue {
       el.setAttribute(key, vnode.data[key]);
     }
 
+    // set dom eventlistener
+    const events = (vnode.data || {}).on || {}
+    for (let key in events) {
+      el.addEventListener(key, events[key])
+    }
+
     if (typeof vnode.children === 'string') {
       el.textContent = vnode.children
     } else {
@@ -50,7 +56,7 @@ class Vue {
     }
 
     return el
-  } 
+  }
   initDataProxy () {
     const data = this.$options.data ? this.$options.data() : {}
 
