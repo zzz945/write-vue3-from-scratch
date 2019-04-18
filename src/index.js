@@ -1,4 +1,4 @@
-import VNode from './vnode.js'
+import VNode, {createEmptyVNode} from './vnode.js'
 
 class Vue {
   constructor (options) {
@@ -14,12 +14,17 @@ class Vue {
     this.dataNotifyChain[key].push(cb)
   }
   $mount (root) {
-    const vnode = this.$options.render(this.createElement)
+    const { mounted, render } = this.$options
+
+    const vnode = render.call(this.proxy, this.createElement)
     this.$el = this.createElm(vnode)
 
     if (root) {
      root.appendChild(this.$el)
     }
+
+    mounted && mounted.call(this.proxy)
+
     return this
   }
   createElement(tag, data, children) {
