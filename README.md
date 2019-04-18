@@ -21,6 +21,8 @@
 
 ### 步骤
 
+#### 阶段1
+
 1. [TDD环境搭建](https://github.com/zzz945/write-vue3-from-scratch/blob/master/01.TDD%20Environment%20Setup.md)
 
 2. [Data代理](https://github.com/zzz945/write-vue3-from-scratch/commit/3d4b919252a98a9f6898329016a17aa1d6d2da70)
@@ -33,19 +35,25 @@
 
 6. [支持lifecycle](https://github.com/zzz945/write-vue3-from-scratch/commit/93ba39e19e2ad2401fe07d4702d95bed6db31a90)
 
-7. [事件监听](https://github.com/zzz945/write-vue3-from-scratch/commit/2f9297b1c389095ebc58f4742fa770abc33186c5)
+7. [html原生元素事件监听](https://github.com/zzz945/write-vue3-from-scratch/commit/2f9297b1c389095ebc58f4742fa770abc33186c5)
 
-5. Component vnode render (TODO)
+8. [实现mvvm](https://github.com/zzz945/write-vue3-from-scratch/commit/664aef66528ce3c464cea4abea90ec223654b6af)
 
-6. Handle dom event (TODO)
+9. [阶段1成果：Basic Demo](https://github.com/zzz945/write-vue3-from-scratch/commit/1b12d416a8e9d0e59f1be5b421c378b06bc1f490)
 
-7. Computed (TODO)
+#### 阶段2
 
-8. Watch (TODO)
+1. Component vnode render (TODO)
 
-9. Component event and action (TODO)
+2. Handle dom event (TODO)
 
-10. Watcher scheduler (TODO)
+3. Computed (TODO)
 
-11. Patch (TODO)
+4. Watch (TODO)
+
+5. Component event and action (TODO)
+
+6. Watcher scheduler (TODO)
+
+7. Patch (TODO)
 

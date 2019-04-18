@@ -20,7 +20,9 @@ class Vue {
     this.$el = this.createElm(vnode)
 
     if (root) {
-     root.appendChild(this.$el)
+      const parent = root.parentElement
+      parent.removeChild(root)
+      parent.appendChild(this.$el)
     }
 
     mounted && mounted.call(this.proxy)
@@ -28,8 +30,8 @@ class Vue {
     return this
   }
   update () {
-    const parent = this.$el.parent
-
+    const parent = this.$el.parentElement
+    
     if (parent) {
       parent.removeChild(this.$el)
     }
@@ -40,6 +42,8 @@ class Vue {
     if (parent) {
       parent.appendChild(this.$el)
     }
+
+    console.log('updated')
   }
   patch (oldVnode, newVnode) {
     return this.createElm(newVnode)
@@ -49,6 +53,7 @@ class Vue {
   }
   createElm (vnode) {
     const el = document.createElement(vnode.tag)
+    el.__vue__ = this
 
     for (let key in vnode.data) {
       el.setAttribute(key, vnode.data[key]);
@@ -75,7 +80,7 @@ class Vue {
     return el
   }
   initDataProxy () {
-    const data = this.$options.data ? this.$options.data() : {}
+    const data = this.$data = this.$options.data ? this.$options.data() : {}
 
     // https://stackoverflow.com/questions/37714787/can-i-extend-proxy-with-an-es2015-class
     return new Proxy(this, {
@@ -94,7 +99,12 @@ class Vue {
         const methods = this.$options.methods || {}
 
         if (key in data) { // 优先取data
-          this.$watch(key, this.update.bind(this)) // 依赖收集
+          // 依赖收集
+          if (!this.collected) {
+            this.$watch(key, this.update.bind(this))
+            this.collected = true
+          } 
+          
           return data[key]
         } 
         if (key in methods) return methods[key].bind(this.proxy)
