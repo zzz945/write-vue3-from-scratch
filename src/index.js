@@ -27,6 +27,23 @@ class Vue {
 
     return this
   }
+  update () {
+    const parent = this.$el.parent
+
+    if (parent) {
+      parent.removeChild(this.$el)
+    }
+
+    const vnode = this.$options.render.call(this.proxy, this.createElement)
+    this.$el = this.patch(null, vnode)
+
+    if (parent) {
+      parent.appendChild(this.$el)
+    }
+  }
+  patch (oldVnode, newVnode) {
+    return this.createElm(newVnode)
+  }
   createElement(tag, data, children) {
     return new VNode(tag, data, children)
   }
@@ -43,8 +60,8 @@ class Vue {
       el.addEventListener(key, events[key])
     }
 
-    if (typeof vnode.children === 'string') {
-      el.textContent = vnode.children
+    if (!Array.isArray(vnode.children)) {
+      el.textContent = vnode.children + ''
     } else {
       vnode.children.forEach(child => {
         if (typeof child === 'string') {
@@ -76,7 +93,10 @@ class Vue {
       get: (_, key) => {
         const methods = this.$options.methods || {}
 
-        if (key in data) return data[key] // 优先取data
+        if (key in data) { // 优先取data
+          this.$watch(key, this.update.bind(this)) // 依赖收集
+          return data[key]
+        } 
         if (key in methods) return methods[key].bind(this.proxy)
         else return this[key]
       }
