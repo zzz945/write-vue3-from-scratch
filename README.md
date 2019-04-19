@@ -43,17 +43,19 @@
 
 #### 阶段2
 
-1. Component vnode render (TODO)
+1. [[mvvm]data支持深层object](https://github.com/zzz945/write-vue3-from-scratch/commit/1d6d3f0676de5cd42ded7b0a650200e6c1a0441e)
 
-2. Handle dom event (TODO)
+2. Component vnode render (TODO)
 
-3. Computed (TODO)
+3. Handle dom event (TODO)
 
-4. Watch (TODO)
+4. Computed (TODO)
 
-5. Component event and action (TODO)
+5. Watch (TODO)
 
-6. Watcher scheduler (TODO)
+6. Component event and action (TODO)
 
-7. Patch (TODO)
+7. Watcher scheduler (TODO)
+
+8. Patch (TODO)
 

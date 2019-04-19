@@ -80,15 +80,41 @@ class Vue {
     return el
   }
   initDataProxy () {
+    // https://stackoverflow.com/questions/37714787/can-i-extend-proxy-with-an-es2015-class
+
     const data = this.$data = this.$options.data ? this.$options.data() : {}
 
-    // https://stackoverflow.com/questions/37714787/can-i-extend-proxy-with-an-es2015-class
-    return new Proxy(this, {
+    const createDataProxyHandler = path => {
+      return {
+        set: (obj, key, value) => {
+          const fullPath = path ? path + '.' + key : key
+
+          const pre = obj[key]
+          obj[key] = value
+  
+          this.notifyDataChange(fullPath, pre, value)
+  
+          return true
+        },
+        get: (obj, key) => {
+          const fullPath = path ? path + '.' + key : key
+
+          // 依赖收集
+          this.collect(fullPath)
+
+          if (typeof obj[key] === 'object' && obj[key] !== null) {
+            return new Proxy(obj[key], createDataProxyHandler(fullPath))
+          } else {
+            return obj[key]
+          }
+        }
+      }
+    }
+
+    const handler = {
       set: (_, key, value) => {
         if (key in data) { // 优先设置data
-          const pre = data[key]
-          data[key] = value
-          this.notifyDataChange(key, pre, value)
+          return createDataProxyHandler().set(data, key, value)
         } else {
           this[key] = value
         }
@@ -99,18 +125,20 @@ class Vue {
         const methods = this.$options.methods || {}
 
         if (key in data) { // 优先取data
-          // 依赖收集
-          if (!this.collected) {
-            this.$watch(key, this.update.bind(this))
-            this.collected = true
-          } 
-          
-          return data[key]
+          return createDataProxyHandler().get(data, key)
         } 
         if (key in methods) return methods[key].bind(this.proxy)
         else return this[key]
       }
-    })
+    }
+    return new Proxy(this, handler)
+  }
+  collect (key) {
+    this.collected = this.collected || {}
+    if (!this.collected[key]) {
+      this.$watch(key, this.update.bind(this))
+      this.collected[key] = true
+    }
   }
   initWatch () {
     this.dataNotifyChain = {}
