@@ -45,9 +45,11 @@
 
 1. [[mvvm]data支持深层object](https://github.com/zzz945/write-vue3-from-scratch/commit/1d6d3f0676de5cd42ded7b0a650200e6c1a0441e)
 
-2. [[mvvm]data中object支持新增属性]
+2. [[mvvm]data中object支持新增属性](https://github.com/zzz945/write-vue3-from-scratch/commit/61eb32a033418f7c9a0fc7d06c9ec097084fec0c)~~~Proxy实现方式自然支持
 
-3. [[mvvm]data支持array]
+3. [[mvvm]data中object支持删除属性](https://github.com/zzz945/write-vue3-from-scratch/commit/e33f9a6e568a304d9b9a8030051e9b5114de8881)
+
+4. [[mvvm]data支持array]
 
 #### 阶段3
 

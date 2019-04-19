@@ -107,6 +107,15 @@ class Vue {
           } else {
             return obj[key]
           }
+        },
+        deleteProperty: (obj, key) => {
+          if (key in obj) {
+            const fullPath = path ? path + '.' + key : key
+            const pre = obj[key]
+            delete obj[key]
+            this.notifyDataChange(fullPath, pre)
+          }
+          return true
         }
       }
     }
@@ -131,7 +140,7 @@ class Vue {
         else return this[key]
       }
     }
-    
+
     return new Proxy(this, handler)
   }
   collect (key) {

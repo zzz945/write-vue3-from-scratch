@@ -60,5 +60,9 @@ describe('Mvvm', function() {
     vm.a.b = 10
     expect(vm.a.b).toBe(10)
     expect(vm.$el.textContent).toBe('10')
+
+    delete vm.a.b
+    expect(vm.a.b).toBe(undefined)
+    expect(vm.$el.textContent).toBe('undefined')
   });
 });
