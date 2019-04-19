@@ -65,4 +65,67 @@ describe('Mvvm', function() {
     expect(vm.a.b).toBe(undefined)
     expect(vm.$el.textContent).toBe('undefined')
   });
+
+  it('Array Setter/Getter', function() {
+    const vm = new Vue({
+      data () {
+        return {
+          a: ['hello'],
+        }
+      },
+      render (h) {
+        return h('div', null, this.a[0])
+      }
+    }).$mount()
+
+    expect(vm.a[0]).toBe('hello')
+    expect(vm.$el.textContent).toBe('hello')
+    vm.a[0] = 'world'
+    expect(vm.a[0]).toBe('world')
+    expect(vm.$el.textContent).toBe('world')
+  });
+
+  it('Array push/splice', function() {
+    const vm = new Vue({
+      data () {
+        return {
+          a: ['hello'],
+        }
+      },
+      render (h) {
+        return h('div', null, this.a[this.a.length-1])
+      }
+    }).$mount()
+
+    expect(vm.a[0]).toBe('hello')
+    expect(vm.$el.textContent).toBe('hello')
+
+    vm.a.push('world')
+    expect(vm.a[1]).toBe('world')
+    expect(vm.$el.textContent).toBe('world')
+
+    vm.a.splice(2, 0, '!!!')
+    expect(vm.a[2]).toBe('!!!')
+    expect(vm.$el.textContent).toBe('!!!')
+  });
+
+  it('change property of object in array', function() {
+    const vm = new Vue({
+      data () {
+        return {
+          a: [{msg: 'hello'}],
+        }
+      },
+      render (h) {
+        return h('div', null, this.a[0].msg)
+      }
+    }).$mount()
+
+    expect(vm.a[0].msg).toBe('hello')
+    expect(vm.$el.textContent).toBe('hello')
+
+    vm.a[0].msg = 'world'
+    expect(vm.a[0].msg).toBe('world')
+    expect(vm.$el.textContent).toBe('world')
+  });
 });

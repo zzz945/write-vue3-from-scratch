@@ -6,7 +6,7 @@
 
 ## 目标
 
-《write-vue3-from-scratch》系列文章，将按Vue3.0公开的思路，不care浏览器兼容性，用最新的技术，写一个最简化的Vue。跟随我的步骤，你将会对Vue有个清晰的理解。
+《write-vue3-from-scratch》系列文章，将按[Vue3.0公开的思路](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)，不care浏览器兼容性，用最新的技术，写一个最简化的Vue。跟随我的步骤，你将会对Vue有个清晰的理解。
 
 ## 方法：测试驱动开发
 
@@ -45,11 +45,11 @@
 
 1. [[mvvm]data支持深层object](https://github.com/zzz945/write-vue3-from-scratch/commit/1d6d3f0676de5cd42ded7b0a650200e6c1a0441e)
 
-2. [[mvvm]data中object支持新增属性](https://github.com/zzz945/write-vue3-from-scratch/commit/61eb32a033418f7c9a0fc7d06c9ec097084fec0c)~~~Proxy实现方式自然支持
+2. [[mvvm]data中object支持新增属性](https://github.com/zzz945/write-vue3-from-scratch/commit/61eb32a033418f7c9a0fc7d06c9ec097084fec0c)~~~vue2.x只能靠$set实现，而我们的proxy实现方式自然支持
 
 3. [[mvvm]data中object支持删除属性](https://github.com/zzz945/write-vue3-from-scratch/commit/e33f9a6e568a304d9b9a8030051e9b5114de8881)
 
-4. [[mvvm]data支持array]
+4. [[mvvm]支持array](https://github.com/zzz945/write-vue3-from-scratch/commit/d55b3947626ac63ac2a1b7b74379594ad3273d09)~~~包括vue2.x只能靠$set才能做到的操作array中object的属性
 
 #### 阶段3
 
