@@ -21,7 +21,7 @@
 
 ### 步骤
 
-#### 阶段1
+#### 阶段1: Basic
 
 1. [TDD环境搭建](https://github.com/zzz945/write-vue3-from-scratch/blob/master/01.TDD%20Environment%20Setup.md)
 
@@ -41,21 +41,27 @@
 
 9. [阶段1成果：Basic Demo](https://github.com/zzz945/write-vue3-from-scratch/commit/1b12d416a8e9d0e59f1be5b421c378b06bc1f490)
 
-#### 阶段2
+#### 阶段2: 完善mvvm
 
 1. [[mvvm]data支持深层object](https://github.com/zzz945/write-vue3-from-scratch/commit/1d6d3f0676de5cd42ded7b0a650200e6c1a0441e)
 
-2. Component vnode render (TODO)
+2. [[mvvm]data中object支持新增属性]
 
-3. Handle dom event (TODO)
+3. [[mvvm]data支持array]
 
-4. Computed (TODO)
+#### 阶段3
 
-5. Watch (TODO)
+1. Component vnode render (TODO)
 
-6. Component event and action (TODO)
+2. Handle dom event (TODO)
 
-7. Watcher scheduler (TODO)
+3. Computed (TODO)
 
-8. Patch (TODO)
+4. Watch (TODO)
+
+5. Component event and action (TODO)
+
+6. Watcher scheduler (TODO)
+
+7. Patch (TODO)
 

@@ -131,6 +131,7 @@ class Vue {
         else return this[key]
       }
     }
+    
     return new Proxy(this, handler)
   }
   collect (key) {
