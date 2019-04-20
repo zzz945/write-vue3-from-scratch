@@ -1,27 +1,48 @@
+## 名词解释
+
+1. 浏览器标准：本文中作为es6、css3、h5的统称
+
+## 我们为什么要学习vue的实现
+
+我们用vue，是因为它是当前业界最佳的解决方案之一，但前端技术方案迭代及工业标准化发展的浪潮，大概率不会在vue这里到达终点。
+
+jquery没有死，它的基因已经注入浏览器标准。而webcomponent shallow dom的灵感，同样有受到vue和react的vdom技术的启发。当然vue也在进化，但要知道，vue的竞争对手，并不是react，而是浏览器的标准化进程。当webcomponent成为主流，我们现在津津乐道的vdom技术也就完成了过渡的使命。
+
+所以我们要有危机感和好奇心，不能过渡依赖vue。我们需要搞清楚在Vue的黑盒中，都做了什么magic。同时，我们也能学习到很多现代软件工程的方法和设计模式，比如tdd、代理模式、观察者模式、封装和解耦的艺术。
+
 ## Vue源码为什么难读
 
-1. Vue源码中80%是非核心功能。而我们读源码的目的，只想了解全貌及部分核心功能，比如数据代理、双向绑定、vnode渲染、component渲染等。
+1. 功能繁多
 
-2. Vue源码中包含大量向后兼容代码。而我们读源码的目的，只想了解思路而非细节。举个最简单的例子，用浏览器原生的proxy实现数据代理和双向绑定，就比Vue2中defineProperty的hack做法要简洁很多。
+我们读vue源码的目的，首先是想了解全貌及部分核心feature的实现，比如双向绑定、vnode渲染等。而Vue源码中包含了太多非核心代码，比如keep alive、dynamic component、functional component等，这些并不是不重要，仅仅是我们暂时对它的实现并不太感兴趣，这些代码的干扰会阻碍我们对核心部分的理解。
 
-## 目标
+2. 向后兼容
 
-《write-vue3-from-scratch》系列文章，将按[Vue3.0公开的思路](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)，不care浏览器兼容性，用最新的技术，写一个最简化的Vue。跟随我的步骤，你将会对Vue有个清晰的理解。
+Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流框架中吸取精华，以及主流浏览器向浏览器标准的靠拢，vue作为框架所承担的责任会越来越小，举个最简单的例子，用ES6的Proxy实现双向绑定，就比Vue2.x中defineProperty的hack做法要简洁很多。而当webcomponent火候成熟，vue甚至连vdom都不用做了。所以vue3的实现一定会比vue2简单，这已经是官方确定的。我判断vue4的实现一定会更精简，而这个趋势一直持续到vue退出历史舞台。
 
-## 方法：测试驱动开发
+## 为什么要从0写一个vue
 
-### Why
+既然我们要学习vue的实现，而vue的源码又包含太多的噪音，难以梳理。纵观全网，虽然源码分析的文章和教程层出不穷，但思路大多依然埋没在vue代码的复杂细节中。那么，我们为何不干掉不感兴趣的功能，不care浏览器兼容性，只用最新的技术，拨开迷雾去写一个最简化的Vue呢？
+
+此项目将按[Vue3.0公开的思路](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)，用测试驱动开发的方法，一步一步写一个最简化的Vue，我会尽量确保每一个commit都容易理解。建议跟随下面步骤做，你将会对Vue有个清晰的理解。
+
+## 测试驱动开发～why?
+
+软件工程上，按我的理解，完全自上而下的设计(瀑布模型)，已经是过时的方法。即使超大型计算机项目，比如操作系统级别的工程，也是宏观自上而下，微观上下结合(敏捷开发)。而TDD是一种上下结合的编程实践，对于每个模块，首先设计测试用例，再写代码实现出来。有以下好处：
 
 1. 控制质量，便于回归测试，提高开发效率
 2. test case即文档
+3. 粗略的顶层设计后（包括产品设计和技术设计），即可自下而上开始编程，避免过渡设计
 
-### How
+## 步骤
 
-对于每个feature，我们首先做几个准入case，再写代码实现出来。
+由于tdd具有强大的test case即文档的基因，所以要理解每一步做了什么事情，只需要看对应的test case代码即可。
 
-### 步骤
+下面每步将按diff的形式给出，必要的地方会加comment。大段整体的阐述会写在diff页面的底部评论区，针对某段代码的comment会穿插其中。欢迎留言和提issue。
 
-#### 阶段1: Basic
+### 阶段1: Basic
+
+这部分，我们从0做起，实现一些基础feature，不求做到完善
 
 1. [TDD环境搭建](https://github.com/zzz945/write-vue3-from-scratch/blob/master/01.TDD%20Environment%20Setup.md)
 
@@ -39,22 +60,28 @@
 
 8. [实现mvvm](https://github.com/zzz945/write-vue3-from-scratch/commit/664aef66528ce3c464cea4abea90ec223654b6af)
 
-9. [阶段1成果：Basic Demo](https://github.com/zzz945/write-vue3-from-scratch/commit/1b12d416a8e9d0e59f1be5b421c378b06bc1f490)~~~运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
+9. [阶段1成果：Basic Demo](https://github.com/zzz945/write-vue3-from-scratch/commit/1b12d416a8e9d0e59f1be5b421c378b06bc1f490)
 
-#### 阶段2: 完善mvvm
+运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
+
+### 阶段2: 完善mvvm
+
+这部分我们完善mvvm到实现vue2.x的所有feature，并实现vue3.0公开的一个重要feature, 官方说法是"Detection of property addition / deletion"，在vue2.x中，我们需要用$set。
 
 1. [[mvvm]data支持深层object](https://github.com/zzz945/write-vue3-from-scratch/commit/1d6d3f0676de5cd42ded7b0a650200e6c1a0441e)
 
-2. [[mvvm]data中object支持新增属性](https://github.com/zzz945/write-vue3-from-scratch/commit/61eb32a033418f7c9a0fc7d06c9ec097084fec0c)~~~vue2.x只能靠$set实现，而我们的proxy实现方式自然支持
+2. [[mvvm]data中object支持新增属性](https://github.com/zzz945/write-vue3-from-scratch/commit/61eb32a033418f7c9a0fc7d06c9ec097084fec0c)
 
 3. [[mvvm]data中object支持删除属性](https://github.com/zzz945/write-vue3-from-scratch/commit/e33f9a6e568a304d9b9a8030051e9b5114de8881)
 
-4. [[mvvm]支持array](https://github.com/zzz945/write-vue3-from-scratch/commit/d55b3947626ac63ac2a1b7b74379594ad3273d09)~~~包括vue2.x只能靠$set才能做到的操作array中object的属性
+4. [[mvvm]支持array](https://github.com/zzz945/write-vue3-from-scratch/commit/d55b3947626ac63ac2a1b7b74379594ad3273d09)
 
-5. [阶段2成果：mvvm in depth demo](https://github.com/zzz945/write-vue3-from-scratch/commit/158b38d5fd786094d4225f243dc90a9f8009a5e4)~~~运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
+5. [阶段2成果：mvvm in depth demo](https://github.com/zzz945/write-vue3-from-scratch/commit/158b38d5fd786094d4225f243dc90a9f8009a5e4)
+
+运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
 
 
-#### 阶段3
+### 阶段3
 
 1. Component vnode render (TODO)
 
