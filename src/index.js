@@ -31,16 +31,13 @@ class Vue {
   }
   update () {
     const parent = this.$el.parentElement
-    
-    if (parent) {
-      parent.removeChild(this.$el)
-    }
 
     const vnode = this.$options.render.call(this.proxy, this.createElement)
+    const oldEl = this.$el
     this.$el = this.patch(null, vnode)
 
     if (parent) {
-      parent.appendChild(this.$el)
+      parent.replaceChild(this.$el, oldEl)
     }
 
     console.log('updated')
@@ -72,7 +69,7 @@ class Vue {
         if (typeof child === 'string') {
           el.textContent = child
         } else {
-          el.appendChild(createElm(child))
+          el.appendChild(this.createElm(child))
         }
       });
     }

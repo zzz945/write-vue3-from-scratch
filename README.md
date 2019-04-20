@@ -39,7 +39,7 @@
 
 8. [实现mvvm](https://github.com/zzz945/write-vue3-from-scratch/commit/664aef66528ce3c464cea4abea90ec223654b6af)
 
-9. [阶段1成果：Basic Demo](https://github.com/zzz945/write-vue3-from-scratch/commit/1b12d416a8e9d0e59f1be5b421c378b06bc1f490)
+9. [阶段1成果：Basic Demo](https://github.com/zzz945/write-vue3-from-scratch/commit/1b12d416a8e9d0e59f1be5b421c378b06bc1f490)~~~运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
 
 #### 阶段2: 完善mvvm
 
@@ -50,6 +50,9 @@
 3. [[mvvm]data中object支持删除属性](https://github.com/zzz945/write-vue3-from-scratch/commit/e33f9a6e568a304d9b9a8030051e9b5114de8881)
 
 4. [[mvvm]支持array](https://github.com/zzz945/write-vue3-from-scratch/commit/d55b3947626ac63ac2a1b7b74379594ad3273d09)~~~包括vue2.x只能靠$set才能做到的操作array中object的属性
+
+5. [阶段2成果：mvvm in depth demo](https://github.com/zzz945/write-vue3-from-scratch/commit/158b38d5fd786094d4225f243dc90a9f8009a5e4)~~~运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
+
 
 #### 阶段3
 
