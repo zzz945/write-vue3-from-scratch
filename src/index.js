@@ -14,26 +14,22 @@ class Vue {
     this.dataNotifyChain[key].push(cb)
   }
   $mount (root) {
-    const { mounted, render } = this.$options
+    this.$el = root
 
-    const vnode = render.call(this.proxy, this.createElement)
-    this.$el = this.createElm(vnode)
+    // first render
+    this.update()
 
-    if (root) {
-      const parent = root.parentElement
-      parent.removeChild(root)
-      parent.appendChild(this.$el)
-    }
-
+    const { mounted } = this.$options
     mounted && mounted.call(this.proxy)
 
     return this
   }
   update () {
-    const parent = this.$el.parentElement
+    const parent = (this.$el || {}).parentElement
 
     const vnode = this.$options.render.call(this.proxy, this.createElement)
     const oldEl = this.$el
+
     this.$el = this.patch(null, vnode)
 
     if (parent) {
@@ -42,22 +38,38 @@ class Vue {
 
     console.log('updated')
   }
+  /**
+   * TODO: patch just create new dom tree from new vnode at the present. we'll implement patch algorithm later.
+   */
   patch (oldVnode, newVnode) {
-    return this.createElm(newVnode)
+    return this.createDom(newVnode)
   }
+  /**
+   * TODO: createElement do not support vue component temporarily
+   */
   createElement(tag, data, children) {
     return new VNode(tag, data, children)
   }
-  createElm (vnode) {
+  createDom (vnode) {
     const el = document.createElement(vnode.tag)
     el.__vue__ = this
 
-    for (let key in vnode.data) {
-      el.setAttribute(key, vnode.data[key]);
+    const data = vnode.data || {}
+
+    // set dom attributes
+    const attributes = data.attrs || {}
+    for (let key in attributes) {
+      el.setAttribute(key, attributes[key]);
+    }
+
+    // set class
+    const classname = data.class
+    if (classname) {
+      el.setAttribute('class', classname);
     }
 
     // set dom eventlistener
-    const events = (vnode.data || {}).on || {}
+    const events = data.on || {}
     for (let key in events) {
       el.addEventListener(key, events[key])
     }
@@ -69,7 +81,7 @@ class Vue {
         if (typeof child === 'string') {
           el.textContent = child
         } else {
-          el.appendChild(this.createElm(child))
+          el.appendChild(this.createDom(child))
         }
       });
     }
@@ -96,7 +108,6 @@ class Vue {
         get: (obj, key) => {
           const fullPath = path ? path + '.' + key : key
 
-          // 依赖收集
           this.collect(fullPath)
 
           if (typeof obj[key] === 'object' && obj[key] !== null) {
@@ -119,9 +130,9 @@ class Vue {
 
     const handler = {
       set: (_, key, value) => {
-        if (key in data) { // 优先设置data
+        if (key in data) { // first data
           return createDataProxyHandler().set(data, key, value)
-        } else {
+        } else { // then class propertry and function
           this[key] = value
         }
 
@@ -130,16 +141,22 @@ class Vue {
       get: (_, key) => {
         const methods = this.$options.methods || {}
 
-        if (key in data) { // 优先取data
+        if (key in data) { // first data 
           return createDataProxyHandler().get(data, key)
-        } 
-        if (key in methods) return methods[key].bind(this.proxy)
-        else return this[key]
+        } else if (key in methods) { // then methods
+          return methods[key].bind(this.proxy)
+        } else { // then class propertry and function
+          return this[key]
+        }
       }
     }
 
     return new Proxy(this, handler)
   }
+  /**
+   * collect: collect dependences on first rendering
+   * @param {string} key The property path in data. For example, student.name students[0].name
+   */
   collect (key) {
     this.collected = this.collected || {}
     if (!this.collected[key]) {

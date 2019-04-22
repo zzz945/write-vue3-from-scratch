@@ -62,7 +62,7 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 9. [阶段1成果：Basic Demo](https://github.com/zzz945/write-vue3-from-scratch/commit/1b12d416a8e9d0e59f1be5b421c378b06bc1f490)
 
-运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
+运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果 
 
 ### 阶段2: 完善mvvm
 
@@ -80,6 +80,9 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 运行npm run test后点击弹出浏览器页面中的DEBUG按钮即可看到效果
 
+6. [简单重构和补充注释](https://github.com/zzz945/write-vue3-from-scratch/commit/84fbcca866edeabe5c7c884e0a65893e8bbd744c)
+
+整理心情，再出发
 
 ### 阶段3
 
@@ -96,4 +99,14 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 6. Watcher scheduler (TODO)
 
 7. Patch (TODO)
+
+## 补充
+
+### virtual dom vs shallow dom
+
+上面对于virtual dom和shallow dom有些混淆，为了不误导大家，这里推荐[一篇好文](https://develoger.com/shadow-dom-virtual-dom-889bf78ce701)。未来vue的发展有两种可能：
+
+1. 可能还会做virtual dom，但virtual dom实际渲染出来会是一个web component，现在vue的scoped css，也将被shallow dom取代。
+
+2. 但还有一种可能。由于virtual dom存在的意义，是操作dom开销大，所以要merge对dom操作。但操作shallow dom会快很多，所有未来virtual dom是否还有必要，尚不可知。
 
