@@ -1,0 +1,50 @@
+import Vue from "../src/index.js";
+
+describe('Component', () => {
+  it('render vnode with component', () => {
+    const vm = new Vue({
+      data () {
+        return { msg1: 'hello', msg2: 'world' }
+      },
+      render (h) {
+        return h('div', null, [
+          h('my-component', { props: {msg: this.msg1}}),
+          h('my-component', { props: {msg: this.msg2}})
+        ])
+      },
+      components: {
+        'my-component': {
+          props: ['msg'],
+          render (h) {
+            return h('p', null, this.msg)
+          }
+        }
+      }
+    }).$mount()
+
+    expect(vm.$el.outerHTML).toEqual(`<div><p>hello</p><p>world</p></div>`)
+  })
+
+  it('component mvvm', () => {
+    const vm = new Vue({
+      data () {
+        return { parentMsg: 'hello' }
+      },
+      render (h) {
+        return h('my-component', { props: {msg: this.parentMsg }})
+      },
+      components: {
+        'my-component': {
+          props: ['msg'],
+          render (h) {
+            return h('p', null, this.msg)
+          }
+        }
+      }
+    }).$mount()
+
+    expect(vm.$el.outerHTML).toEqual('<p>hello</p>')
+    vm.parentMsg = 'hi'
+    expect(vm.$el.outerHTML).toEqual('<p>hi</p>')
+  })
+}) 
