@@ -84,17 +84,19 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 整理心情，再出发
 
-### 阶段3
+### 阶段3: 支持组件
 
-1. Component vnode render (TODO)
+1. [支持属性](https://github.com/zzz945/write-vue3-from-scratch/commit/c58a0f060227569b9e298a5ad8d8bfdc399b40b3)
 
-2. Handle dom event (TODO)
+2. [实现组件渲染](https://github.com/zzz945/write-vue3-from-scratch/commit/9dc6bd598c7b57fa588e5541a5993b044fd5888e)
 
-3. Computed (TODO)
+3. 实现event/action (TODO)
 
-4. Watch (TODO)
+### 阶段4
 
-5. Component event and action (TODO)
+4. Computed (TODO)
+
+5. Watch (TODO)
 
 6. Watcher scheduler (TODO)
 
