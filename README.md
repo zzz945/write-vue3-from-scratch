@@ -6,7 +6,7 @@
 
 我们用vue，是因为它是当前业界最佳的解决方案之一，但前端技术方案迭代及工业标准化发展的浪潮，大概率不会在vue这里到达终点。
 
-jquery没有死，它的基因已经注入浏览器标准。而webcomponent shallow dom的灵感，同样有受到vue和react的vdom技术的启发。当然vue也在进化，但要知道，vue的竞争对手，并不是react，而是浏览器的标准化进程。当webcomponent成为主流，我们现在津津乐道的vdom技术也就完成了过渡的使命。
+jquery没有死，它的基因已经注入浏览器标准。而webcomponent shadow dom的灵感，同样有受到vue和react的vdom技术的启发。当然vue也在进化，但要知道，vue的竞争对手，并不是react，而是浏览器的标准化进程。当webcomponent成为主流，我们现在津津乐道的vdom技术也就完成了过渡的使命。
 
 所以我们要有危机感和好奇心，不能过渡依赖vue。我们需要搞清楚在Vue的黑盒中，都做了什么magic。同时，我们也能学习到很多现代软件工程的方法和设计模式，比如tdd、代理模式、观察者模式、封装和解耦的艺术。
 
@@ -102,11 +102,17 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 ## 补充
 
-### virtual dom vs shallow dom
+### virtual dom vs shadow dom
 
-上面对于virtual dom和shallow dom有些混淆，为了不误导大家，这里推荐[一篇好文](https://develoger.com/shadow-dom-virtual-dom-889bf78ce701)。未来vue的发展有两种可能：
+上面对于virtual dom和shadow dom有些混淆，为了不误导大家，这里推荐两篇文章
 
-1. 可能还会做virtual dom，但virtual dom实际渲染出来会是一个web component，现在vue的scoped css，也将被shallow dom取代。
+1. https://develoger.com/shadow-dom-virtual-dom-889bf78ce701
 
-2. 但还有一种可能。由于virtual dom存在的意义，是操作dom开销大，所以要merge对dom操作。但操作shallow dom会快很多，所有未来virtual dom是否还有必要，尚不可知。
+2. https://svelte.dev/blog/virtual-dom-is-pure-overhead
+
+所以，未来vue的发展有两种可能：
+
+1. 可能还会做virtual dom，但virtual dom实际渲染出来会是一个web component，现在vue的scoped css，也将被shadow dom取代。
+
+2. 但还有一种可能。virtual dom存在的意义是由于考虑到操作dom开销大，所以要merge对dom操作。但操作shadow dom会快很多，所有我对未来virtual dom是否还有必要保持怀疑。
 
