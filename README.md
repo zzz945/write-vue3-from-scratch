@@ -90,7 +90,7 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 2. [实现组件渲染](https://github.com/zzz945/write-vue3-from-scratch/commit/9dc6bd598c7b57fa588e5541a5993b044fd5888e)
 
-3. 实现event/action (TODO)
+3. [实现event&action](https://github.com/zzz945/write-vue3-from-scratch/commit/9202efc753749782e6274d19a66026289b22ec03)
 
 ### 阶段4
 

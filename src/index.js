@@ -10,6 +10,11 @@ class Vue {
 
     return this.proxy
   }
+  $emit (...options) {
+    const [name, ...rest] = options
+    const cb = this._events[name]
+    if (cb) cb(...rest)
+  }
   $watch (key, cb) {
     this.dataNotifyChain[key] = this.dataNotifyChain[key] || []
     this.dataNotifyChain[key].push(cb)
@@ -50,7 +55,7 @@ class Vue {
    */
   createElement(tag, data, children) {
     const components = this.$options.components || {}
-    
+
     if (tag in components) {
       return new VNode(tag, data, children, components[tag])
     }
@@ -60,8 +65,10 @@ class Vue {
   createDom (vnode) {
     // vnode is a component
     if (vnode.componentOptions) { 
-      const componentInstance = new Vue(Object.assign({}, vnode.componentOptions, { propsData: vnode.data.props })).$mount()
+      const componentInstance = new Vue(Object.assign({}, vnode.componentOptions, { propsData: vnode.data.props }))
       vnode.componentInstance = componentInstance
+      componentInstance._events = (vnode.data || {}).on || {}
+      componentInstance.$mount()
       return componentInstance.$el
     }
 

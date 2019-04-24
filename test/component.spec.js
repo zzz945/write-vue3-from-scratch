@@ -47,4 +47,29 @@ describe('Component', () => {
     vm.parentMsg = 'hi'
     expect(vm.$el.outerHTML).toEqual('<p>hi</p>')
   })
+
+  it('event & action', () => {
+    var cb = jasmine.createSpy('cb');
+
+    const vm = new Vue({
+      render (h) {
+        return h('my-component', { on: {
+          mounted: cb
+        }})
+      },
+      components: {
+        'my-component': {
+          render (h) {
+            return h('div', {}, 'my-component')
+          },
+          mounted () {
+            this.$emit('mounted', {payload: "payload"})
+          }
+        }
+      }
+    }).$mount()
+
+    expect(cb).withContext(vm)
+    expect(cb).toHaveBeenCalledWith({payload: "payload"})
+  })
 }) 
