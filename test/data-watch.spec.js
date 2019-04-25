@@ -9,11 +9,14 @@ describe('Watch data change', function() {
         }
   		}
     })
-    
-    vm.a = 3
+
+    var cb = jasmine.createSpy('cb');
+
     vm.$watch('a', (pre, val) => {
-      expect(pre).toEqual(2);
-      expect(val).toEqual(3);
+      cb(pre, val)
     })
+    vm.a = 3
+
+    expect(cb).toHaveBeenCalledWith(2, 3)
   });
 });
