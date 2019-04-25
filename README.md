@@ -118,3 +118,6 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 2. 但还有一种可能。virtual dom存在的意义是由于考虑到操作dom开销大，所以要merge对dom操作。但操作shadow dom会快很多，所有我对未来virtual dom是否还有必要保持怀疑。
 
+### 作者其它文章
+
+1. [ES6类继承原理及缺陷](https://juejin.im/post/5cc064bde51d456e27504be7)
