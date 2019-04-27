@@ -33,6 +33,11 @@ $ npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
 
 $ npm install -g karma-cli
 ```
+
+7. Init Karma
+```sh
+$ karma init # generate default config
+```
  
 7. [install](https://github.com/webpack-contrib/karma-webpack) and [config](https://github.com/zzz945/write-vue3-from-scratch/commit/9bf43f9b3ddc8f15a6b1d0e3ab77b725b339cb70#diff-a2a3b7b0c9c3b4b93b4aebf4e3ec3cfb) karma-webpack for test scripts to support es6
 
@@ -46,10 +51,4 @@ $ npm i -D karma-webpack
 $ karma start
 ```
 
-### Usage
-
-```sh
-$ npm run test # 自动启动浏览器，执行所有测试用例
-```
-
-代码支持HMR，每次保存会自动执行测试用例
+HMR support. Test case will run on every save.
