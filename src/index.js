@@ -1,11 +1,12 @@
 import VNode, {createEmptyVNode} from './vnode.js'
-
+import Watcher from './watcher.js'
 class Vue {
   constructor (options) {
     this.$options = options
 
     this.initProps()
     this.proxy = this.initDataProxy()
+    this.initWatcher()
     this.initWatch()
 
     return this.proxy
@@ -121,7 +122,7 @@ class Vue {
           obj[key] = value
   
           this.notifyDataChange(fullPath, pre, value)
-  
+
           return true
         },
         get: (obj, key) => {
@@ -182,16 +183,38 @@ class Vue {
     return new Proxy(this, handler)
   }
   /**
-   * collect: collect dependences on first rendering
+   * collect: collect dependences
    * @param {string} key The property path in data. For example, student.name students[0].name
    */
   collect (key) {
+    // on first rendering
     if (this._duringFirstRendering) {
       this.$watch(key, this.update.bind(this))
     }
+    // _target is set in Watcher's constructor
+    if (this._target) {
+      this.$watch(key, this._target.update.bind(this._target))
+    }
+  }
+  initWatcher () {
+    this.dataNotifyChain = {}
   }
   initWatch () {
-    this.dataNotifyChain = {}
+    const watch = this.$options.watch || {}
+    const computed = this.$options.computed || {}
+    const data = this.$data
+
+    for (let key in watch) {
+      const handler = watch[key]
+      if (key in data) {
+        this.$watch(key, handler.bind(this.proxy))
+      } else if (key in computed){
+        // this will trigger the proxy getter in which we call collect with _target
+        new Watcher(this.proxy, computed[key], handler)
+      } else {
+        throw "i don't know what you wanna do"
+      }
+    }
   }
   notifyDataChange (key, pre, val) {
     (this.dataNotifyChain[key] || []).forEach(cb => cb(pre, val))
