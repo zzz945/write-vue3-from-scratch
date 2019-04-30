@@ -23,17 +23,20 @@ class Vue {
     this.$el = root
 
     // first render
-    this.update()
+    this._duringFirstRendering = true
+    this.update(true)
+    this._duringFirstRendering = false
 
     const { mounted } = this.$options
     mounted && mounted.call(this.proxy)
 
     return this
   }
-  update () {
+  update (firstRender) {
     const parent = (this.$el || {}).parentElement
 
     const vnode = this.$options.render.call(this.proxy, this.createElement.bind(this))
+
     const oldEl = this.$el
 
     this.$el = this.patch(null, vnode)
@@ -50,9 +53,6 @@ class Vue {
   patch (oldVnode, newVnode) {
     return this.createDom(newVnode)
   }
-  /**
-   * TODO: createElement do not support vue component temporarily
-   */
   createElement(tag, data, children) {
     const components = this.$options.components || {}
 
@@ -150,6 +150,7 @@ class Vue {
     const data = this.$data = this.$options.data ? this.$options.data() : {}
     const props = this._props
     const methods = this.$options.methods || {}
+    const computed = this.$options.computed || {}
 
     const handler = {
       set: (_, key, value) => {
@@ -168,6 +169,8 @@ class Vue {
           return createDataProxyHandler().get(props, key)
         } else if (key in data) { // then data 
           return createDataProxyHandler().get(data, key)
+        } else if (key in computed) { // then computed
+          return computed[key].call(this.proxy)
         } else if (key in methods) { // then methods
           return methods[key].bind(this.proxy)
         } else { // then class propertry and function
@@ -183,10 +186,8 @@ class Vue {
    * @param {string} key The property path in data. For example, student.name students[0].name
    */
   collect (key) {
-    this.collected = this.collected || {}
-    if (!this.collected[key]) {
+    if (this._duringFirstRendering) {
       this.$watch(key, this.update.bind(this))
-      this.collected[key] = true
     }
   }
   initWatch () {

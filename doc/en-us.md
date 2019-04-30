@@ -67,10 +67,10 @@ In this part, we improve mvvm to implement all features in vue2.x. Moreover, we 
 
 ### Todo list
 
-4. Computed
+1. [Computed](https://github.com/zzz945/write-vue3-from-scratch/commit/c796f1a65b5b5d831fa0fce0dfb6da4b894987e3)
 
-5. Watch
+2. Watch
 
-6. Watcher scheduler
+3. Watcher scheduler
 
-7. Patch
+4. Patch

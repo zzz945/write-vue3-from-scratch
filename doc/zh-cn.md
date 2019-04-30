@@ -94,13 +94,13 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 ### 阶段4
 
-4. Computed (TODO)
+1. [计算属性](https://github.com/zzz945/write-vue3-from-scratch/commit/c796f1a65b5b5d831fa0fce0dfb6da4b894987e3)
 
-5. Watch (TODO)
+2. Watch (TODO)
 
-6. Watcher scheduler (TODO)
+3. Watcher scheduler (TODO)
 
-7. Patch (TODO)
+4. Patch (TODO)
 
 ## 补充
 
