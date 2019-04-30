@@ -92,15 +92,19 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 3. [实现event&action](https://github.com/zzz945/write-vue3-from-scratch/commit/9202efc753749782e6274d19a66026289b22ec03)
 
-### 阶段4
+### 阶段4: Computed & watch
 
 1. [计算属性](https://github.com/zzz945/write-vue3-from-scratch/commit/c796f1a65b5b5d831fa0fce0dfb6da4b894987e3)
 
-2. Watch (TODO)
+2. [实现watch](https://github.com/zzz945/write-vue3-from-scratch/commit/b06f36e035c396d30944e23a9bcf950737912400)
 
 3. Watcher scheduler (TODO)
 
-4. Patch (TODO)
+### Todo list
+
+1. Patch
+
+2. Scoped Slot
 
 ## 补充
 

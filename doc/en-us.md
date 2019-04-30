@@ -65,12 +65,16 @@ In this part, we improve mvvm to implement all features in vue2.x. Moreover, we 
 
 3. [Component event & action](https://github.com/zzz945/write-vue3-from-scratch/commit/9202efc753749782e6274d19a66026289b22ec03)
 
-### Todo list
+### Computed & watch
 
 1. [Computed](https://github.com/zzz945/write-vue3-from-scratch/commit/c796f1a65b5b5d831fa0fce0dfb6da4b894987e3)
 
-2. Watch
+2. [watch](https://github.com/zzz945/write-vue3-from-scratch/commit/b06f36e035c396d30944e23a9bcf950737912400)
 
 3. Watcher scheduler
 
-4. Patch
+### Todo list
+
+1. Patch
+
+2. Scoped Slot
