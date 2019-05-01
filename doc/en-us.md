@@ -71,7 +71,10 @@ In this part, we improve mvvm to implement all features in vue2.x. Moreover, we 
 
 2. [watch](https://github.com/zzz945/write-vue3-from-scratch/commit/b06f36e035c396d30944e23a9bcf950737912400)
 
-3. Watcher scheduler
+3. [Refactor](https://github.com/zzz945/write-vue3-from-scratch/commit/5b4b542670af037f6418726662c8a546bbcd80bc)
+
+4. Watcher scheduler
+
 
 ### Todo list
 

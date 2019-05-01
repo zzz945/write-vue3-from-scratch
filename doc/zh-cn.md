@@ -98,7 +98,9 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 2. [实现watch](https://github.com/zzz945/write-vue3-from-scratch/commit/b06f36e035c396d30944e23a9bcf950737912400)
 
-3. Watcher scheduler (TODO)
+3. [重构：优雅实现代理和依赖收集](https://github.com/zzz945/write-vue3-from-scratch/commit/5b4b542670af037f6418726662c8a546bbcd80bc)
+
+4. Watcher scheduler (TODO)
 
 ### Todo list
 
