@@ -1,12 +1,14 @@
 import VNode from './vnode.js'
-import { Watcher, ComputedWatcher } from './watcher.js'
+import { Watcher, ComputedWatcher, genWatcherId } from './watcher.js'
 import Dep from './dep.js'
 import { createProxy, setTarget, clearTarget } from './proxy.js'
 import { nextTick } from './util.js'
+import { queueWatcher } from './scheduler.js'
 
 class Vue {
   constructor (options) {
     this.$options = options || {}
+    this.id = genWatcherId()
 
     this.initProps()
     this.proxy = createProxy(this)
@@ -34,7 +36,7 @@ class Vue {
 
     // collect dependences on first rendering
     setTarget(this)
-    this.update()
+    this.run()
     clearTarget()
 
     const { mounted } = this.$options
@@ -43,6 +45,9 @@ class Vue {
     return this
   }
   update () {
+    queueWatcher(this)
+  }
+  run () {
     const parent = (this.$el || {}).parentElement
 
     const vnode = this.$options.render.call(this.proxy, this.createElement.bind(this))

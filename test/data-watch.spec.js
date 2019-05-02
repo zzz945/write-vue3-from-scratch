@@ -1,7 +1,7 @@
 import Vue from "../src/index.js";
 
 describe('Watch data change', function() {
-  it('cb is called', function() {
+  it('cb is called', done => {
   	var vm = new Vue({
   		data () {
         return {
@@ -15,8 +15,11 @@ describe('Watch data change', function() {
     vm.$watch('a', (pre, val) => {
       cb(pre, val)
     })
-    vm.a = 3
 
-    expect(cb).toHaveBeenCalledWith(2, 3)
+    vm.a = 3
+    setTimeout(_ => {
+      expect(cb).toHaveBeenCalledWith(2, 3)
+      done()
+    }, 0)
   });
 });

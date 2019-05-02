@@ -12,7 +12,7 @@ export default class Dep {
   }
   removeSub (sub) {
     remove(this.subs, sub)
-  } 
+  }
   notify (payload) {
     const subs = this.subs
     for (let i = 0, l = subs.length; i < l; i++) {

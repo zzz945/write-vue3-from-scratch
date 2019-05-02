@@ -25,7 +25,7 @@ describe('Component', () => {
     expect(vm.$el.outerHTML).toEqual(`<div><p>hello</p><p>world</p></div>`)
   })
 
-  it('component mvvm', () => {
+  it('component mvvm', done => {
     const vm = new Vue({
       data () {
         return { parentMsg: 'hello' }
@@ -45,7 +45,11 @@ describe('Component', () => {
 
     expect(vm.$el.outerHTML).toEqual('<p>hello</p>')
     vm.parentMsg = 'hi'
-    expect(vm.$el.outerHTML).toEqual('<p>hi</p>')
+
+    setTimeout(_ => {
+      expect(vm.$el.outerHTML).toEqual('<p>hi</p>')
+      done()
+    }, 0)
   })
 
   it('event & action', () => {

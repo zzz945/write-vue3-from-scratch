@@ -1,7 +1,7 @@
 import Vue from "../src/index.js";
 
 describe('Watch', function() {
-  it('Data', function() {
+  it('Data', done => {
     var cb = jasmine.createSpy('cb');
 
   	var vm = new Vue({
@@ -16,10 +16,15 @@ describe('Watch', function() {
         }
       },
     })
+    
     vm.a = 3
-    expect(cb).toHaveBeenCalledWith(2, 3)
+    
+    setTimeout(_ => {
+      expect(cb).toHaveBeenCalledWith(2, 3)
+      done()
+    }, 0)
   });
-  it('Computed', function() {
+  it('Computed', done => {
     var cb = jasmine.createSpy('cb');
 
   	var vm = new Vue({
@@ -42,6 +47,9 @@ describe('Watch', function() {
     expect(vm.b).toEqual(3)
     vm.a = 3
     expect(vm.b).toEqual(4)
-    expect(cb).toHaveBeenCalledWith(4, 3, 4)
+    setTimeout(_ => {
+      expect(cb).toHaveBeenCalledWith(4, 3, 4)
+      done()
+    })
   });
 });
