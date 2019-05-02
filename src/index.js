@@ -2,9 +2,11 @@ import VNode from './vnode.js'
 import { Watcher, ComputedWatcher } from './watcher.js'
 import Dep from './dep.js'
 import { createProxy, setTarget, clearTarget } from './proxy.js'
+import { nextTick } from './util.js'
+
 class Vue {
   constructor (options) {
-    this.$options = options
+    this.$options = options || {}
 
     this.initProps()
     this.proxy = createProxy(this)
@@ -12,6 +14,9 @@ class Vue {
     this.initWatch()
 
     return this.proxy
+  }
+  $nextTick (cb) {
+    nextTick(cb, this.proxy)
   }
   $emit (...options) {
     const [name, ...rest] = options
