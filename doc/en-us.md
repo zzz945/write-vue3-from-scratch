@@ -73,8 +73,36 @@ In this part, we improve mvvm to implement all features in vue2.x. Moreover, we 
 
 3. [Refactor](https://github.com/zzz945/write-vue3-from-scratch/commit/5b4b542670af037f6418726662c8a546bbcd80bc)
 
-4. Watcher scheduler
+4. [$nextTick](https://github.com/zzz945/write-vue3-from-scratch/commit/d1fe1760a55bd71fe70904033499597304a64113)
 
+5. [Watcher Scheduler](https://github.com/zzz945/write-vue3-from-scratch/commit/3acca9bbd5b6dc7baa744fdea9832234c8298f83)
+
+Watcher scheduler solves the problem that changing multiple data triggers rendering multiple times
+```js
+var cb = jasmine.createSpy('cb');
+
+var vm = new Vue({
+  data () {
+    return {
+      a:1,
+      b:2,
+    }
+  },
+  render (h) {
+    cb()
+    return h('p', null, this.a + this.b)
+  }
+}).$mount()
+
+expect(cb).toHaveBeenCalledTimes(1)
+
+vm.a = 10
+vm.b = 11
+setTimeout(_ => {
+  expect(cb).toHaveBeenCalledTimes(2) // change 'a' and 'b' only trigger one render
+  done()
+})
+```
 
 ### Todo list
 

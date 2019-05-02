@@ -100,7 +100,36 @@ Vue源码中包含大量向后兼容代码，但随着浏览器标准从主流�
 
 3. [重构：优雅实现代理和依赖收集](https://github.com/zzz945/write-vue3-from-scratch/commit/5b4b542670af037f6418726662c8a546bbcd80bc)
 
-4. Watcher scheduler (TODO)
+4. [实现$nextTick](https://github.com/zzz945/write-vue3-from-scratch/commit/d1fe1760a55bd71fe70904033499597304a64113)
+
+5. [实现Watcher调度](https://github.com/zzz945/write-vue3-from-scratch/commit/3acca9bbd5b6dc7baa744fdea9832234c8298f83)
+
+为了解决改变多个data会触发多次render的问题
+```js
+var cb = jasmine.createSpy('cb');
+
+var vm = new Vue({
+  data () {
+    return {
+      a:1,
+      b:2,
+    }
+  },
+  render (h) {
+    cb()
+    return h('p', null, this.a + this.b)
+  }
+}).$mount()
+
+expect(cb).toHaveBeenCalledTimes(1)
+
+vm.a = 10
+vm.b = 11
+setTimeout(_ => {
+  expect(cb).toHaveBeenCalledTimes(2) // change 'a' and 'b' only trigger one render
+  done()
+})
+```
 
 ### Todo list
 

@@ -51,7 +51,7 @@ describe('Watcher Scheduler', function() {
     vm.a = 10
     vm.b = 11
     setTimeout(_ => {
-      expect(cb).toHaveBeenCalledTimes(2)
+      expect(cb).toHaveBeenCalledTimes(2) // change 'a' and 'b' only trigger one render
       done()
     })
   });
