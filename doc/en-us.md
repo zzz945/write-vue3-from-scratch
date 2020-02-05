@@ -1,20 +1,20 @@
 ## Why vue source code difficult to read
 
-1. Contain too many features
+1. Include too many features
 
-The main purpose of reading vue source code is to understand the whole picture and some core features, such as mvvm and virtual dom. Other staff such as keep alive, dynamic component and functional component, will keep us from understanding the whole picture.
+The main goal of reading vue source code is understanding the whole picture and some core features such as mvvm and virtual dom. Some features such as keep alive, dynamic component and functional component, will make things complicated.
 
 2. Backward compatibility
 
-Vue source code contains a lot of backward compatible code, making vue too complicated to understand. For example, using ES6 Proxy to implement mvvm is much simpler than using defineProperty.
+Vue source code has a lot of backward compatible code, making it too complicated to understand. For example, Vue2.0 uses defineProperty to implement mvvm for backward compatibility. However, it is much easier to do that with ES6 Proxy.
 
 ## Write vue from scratch
 
-This project follows [Vue3.0 plans](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf). I write a simplest Vue step by step and make sure each commit is easy to understand.
+This project follows [Vue3.0 plans](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf). I write a simplest vue step by step to make each commit easy to understand.
 
 ## Step
 
-For each step, I write test case first, then implement it.
+For each step, I write test case first, then implement it. (TDD)
 
 ### Basic
 
