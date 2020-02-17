@@ -2,7 +2,7 @@
 
 1. Include too many features
 
-The main goal of reading vue source code is understanding the whole picture and some core features such as mvvm and virtual dom. Some features such as keep alive, dynamic component and functional component, will make things complicated.
+The main goal of reading vue source code is understanding the whole picture and some core features such as mvvm and virtual dom. Some features make things complicated, such as keep alive, dynamic component and functional component.
 
 2. Backward compatibility
 
